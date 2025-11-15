@@ -1,0 +1,39 @@
+<!-- listagem.hbs -->
+{{! views/pessoas/listagem.hbs }}
+
+<div class="container mt-4">
+    <h2>{{title}}</h2>
+    <p>Aplicação CRUD - Listagem de Pessoas</p>
+
+    <a href="/pessoas/cadastro" class="btn btn-primary mb-3">
+        + Inserir Nova Pessoa
+    </a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Data de Nascimento</th>
+                <th>Endereço</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each pessoas}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.nome}}</td>
+                <td>{{this.telefone}}</td>
+                <td>{{this.dataNascimento}}</td>
+                <td>{{this.endereco}}</td>
+                <td>
+                    <a href="/pessoas/editar/{{this.id}}" class="btn btn-sm btn-info">Alterar</a>
+                    <a href="/pessoas/excluir/{{this.id}}" class="btn btn-sm btn-danger">Excluir</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

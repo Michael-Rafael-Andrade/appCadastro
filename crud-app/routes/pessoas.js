@@ -6,6 +6,7 @@ var router = express.Router();
 // importa modelo (os dados em mémoria no objeto)
 var pessoaModel = require('../models/PessoaModel');
 
+
 // GET /pessoas/Listagem
 router.get('/listagem', function(req, res, next) {
     // O controller pega os dados brutos do Model
@@ -16,6 +17,15 @@ router.get('/listagem', function(req, res, next) {
     res.render('pessoas/listagem', {
         title: 'Listagem de Pessoas',
         pessoas: listaDePessoas,
+    });
+});
+
+// GET /pessoas/cadastro
+// Rota para EXIBIR o formulário de cadastro
+router.get('/cadastro', function(req, res, next){
+    // Apenas renderiza o formulário vazio, sem precisar do Model ainda.
+    res.render('pessoas/cadastro', {
+        title: 'Cadastro de Nova Pessoa'
     });
 });
 

@@ -1,0 +1,34 @@
+{{! views/pessoas/cadastro.hbs }}
+
+<div class="container mt-4">
+    <h2>{{title}}</h2>
+    <p>Preencha os dados da nova pessoa:</p>
+    
+    <form method="POST" action="pessoas/cadastro">
+        <div class="form-group mb-3">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="telefone">Telefone:</label>
+            <input type="text" class="form-control" id="telefone" name="telefone">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="sexo">Sexo:</label>
+            <select class="form-control" id="sexo" name="sexo">
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Outro">Outro</option>
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="endereco">Endereço:</label>
+            <input type="text" class="form-control" id="endereco" name="endereco">
+        </div>
+
+        <button type="submit" class="btn btn-success">Salvar Pessoa</button>
+        <a href="/pessoas/listagem" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
