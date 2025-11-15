@@ -29,6 +29,49 @@ router.get('/cadastro', function(req, res, next){
     });
 });
 
+// POST /pessoas/cadastro
+// Rota para RECEBER os dados do formulário e salvar no Model
+router.post('/cadastro', function(req, res, next){
+    // Acessa os dados do formulário através do req.body
+    const dadosNovaPessoa = {
+        // Usamos o Model para garantir um ID único e sequencial
+        id: pessoaModel.getMaxId(),
+        nome: req.body.nome,
+        telefone: req.body.telefone,
+        dataNascimento: req.body.dataNascimento,
+        sexo: req.body.sexo,
+        endereco: req.body.endereco,
+    };
+
+    // Adiciona o novo objeto ao array de pessoas (nosso Model em memória)
+    pessoaModel.pessoas.push(dadosNovaPessoa);
+
+    // Redireciona o usuário para a página de listagem para ver o novo registro
+    res.redirect('/pessoas/listagem');
+
+});
+
+// GET /pessoas/excluir/:id
+// Rota para EXCLUIR uma pessoa pelo ID
+router.get('/excluir/:id', function(req, res, next){
+    // Captura o ID da URL e converte para número
+    // req.params.id é o valor que o EXPRESS extrai do :id na rota
+    const idParaExcluir = parseInt(req.params.id);
+
+    // Encontra a posição (índice) do objeto no array
+    const indice = pessoaModel.pessoas.findIndex(p => p.id === idParaExcluir);
+
+    // Verifica se encontrou a pessoa
+    if(indice !== -1){
+        // Se encontrou, remove o item do array
+        // O Node.js / JavaScript usará a função splice para essa manipulação
+        pessoalModel.pessoas.splice(indice, 1);
+    }
+
+    // Redireciona o usuário de volta para a listagem atualizada
+    res.redirect('/pessoas/listagem');
+});
+
 // Exporta o router para ser usado pelo app.js
 module.exports = router;
 
