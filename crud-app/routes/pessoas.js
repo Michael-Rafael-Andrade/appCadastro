@@ -72,6 +72,25 @@ router.get('/excluir/:id', function(req, res, next){
     res.redirect('/pessoas/listagem');
 });
 
+// GET /pessoas/editar/:id
+// Rota para BUSCAR a pessoa e exibir o formulário de edição PREENCHIDO
+router.get('/editar/:id', function(req, res, next){
+    // Captura o ID da URL e converte para número
+    const idParaEditar = parseInt(req.params.id);
+
+    // Encontra o objeto pessoa no array
+    const pessoaEncontrada = pessoaModel.pessoas.find(p => p.id === idParaEditar);
+
+    // Verifica se encontrou a pessoa
+    if(pessoaEncontrada){
+        // Renderiza a View de edição, enviando o objeto da pessoa
+        res.render('pessoas/edicao', { pessoa: pessoaEncontrada });
+    } else {
+        // Se não encontrou, redireciona para a listagem
+        res.redirect('/pessoas/listagem');
+    }
+});
+
 // Exporta o router para ser usado pelo app.js
 module.exports = router;
 
