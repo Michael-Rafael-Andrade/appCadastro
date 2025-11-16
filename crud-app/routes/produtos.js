@@ -27,4 +27,32 @@ router.get('/cadastro', function(req, res, next) {
     });
 });
 
+// routes/produtos.js (Adicionar o import se estiver faltando)
+var produtoModel = require('../models/ProdutoModel'); 
+
+// ...
+
+// POST /produtos/cadastro
+// Rota para RECEBER os dados do formulário e salvar no Model
+router.post('/cadastro', function(req, res, next) {
+    
+    // Captura os dados do formulário (req.body)
+    const dadosNovoProduto = {
+        // Gera o próximo ID único
+        id: produtoModel.getMaxId(),
+        nome: req.body.nome,
+        descricao: req.body.descricao,
+        
+        // 🚨 CRÍTICO: Converte strings (do formulário) para números
+        quantidade: parseInt(req.body.quantidade), 
+        valor: parseFloat(req.body.valor),         
+    };
+
+    // Adiciona o novo objeto ao array de produtos no Model
+    produtoModel.produtos.push(dadosNovoProduto);
+
+    // Redireciona o usuário para a listagem para ver o novo registro
+    res.redirect('/produtos/listagem');
+});
+
 module.exports = router;
