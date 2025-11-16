@@ -9,12 +9,28 @@ var pessoaModel = require('../models/PessoaModel');
 
 // GET /pessoas/Listagem
 router.get('/listagem', function (req, res, next) {
-    // O controller pega os dados brutos do Model
+    // 1. Capturar o termo de busca (q) 🔍
+    // req.query.q busca o valor do parâmetro 'q' na URL (ex: /listagem?q=Ana)
     const termoBusca = req.query.q;
+
+    // 2. Inicializar a lista de pessoas com a lista completa do Model
     let listaDePessoas = pessoaModel.pessoas;
 
-    // O Controller decide qual view renderizar, enviando os dados necessários 
-    // O Express/HBS procurará por views/pessoas/listagem.hbs
+    // 3. Aplicar filtro SE o termo de busca existir
+    if (termoBusca) {
+        // Usa o filter() para criar um novo array apenas com os resultados
+        listaDePessoas = listaDePessoas.filter(p => {
+            // Converte o nome da pessoa e o termo de busca para minúsculas
+            // Isso garante que a busca seja Case Insensitive (não diferencie maiúsculas/minúsculas)
+            const nomeMinusculo = p.nome.toLowerCase();
+            const buscaMinuscula = termoBusca.toLowerCase();
+
+            // Retorna TRUE se o nome (em minúsculas) contiver o termo de busca (em minúsculas)
+            return nomeMinusculo.includes(buscaMinuscula);
+        });
+    }
+
+    // O Controller decide qual view renderizar, enviando a lista (filtrada ou completa)
     res.render('pessoas/listagem', {
         title: 'Listagem de Pessoas',
         pessoas: listaDePessoas,
