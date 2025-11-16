@@ -65,7 +65,7 @@ router.get('/excluir/:id', function (req, res, next) {
     if (indice !== -1) {
         // Se encontrou, remove o item do array
         // O Node.js / JavaScript usará a função splice para essa manipulação
-        pessoalModel.pessoas.splice(indice, 1);
+        pessoaModel.pessoas.splice(indice, 1);
     }
 
     // Redireciona o usuário de volta para a listagem atualizada

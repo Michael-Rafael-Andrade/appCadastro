@@ -1,0 +1,42 @@
+{{! views/produtos/listagem.hbs }}
+
+<div class="container mt-4">
+    <h2>{{title}}</h2>
+    <p>Gestão de Estoque - Listagem de Produtos</p>
+
+    <a href="/produtos/cadastro" class="btn btn-primary mb-3">
+        ➕ Inserir Novo Produto
+    </a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Valor (R$)</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each produtos}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.nome}}</td>
+                <td>{{this.descricao}}</td>
+                <td>{{this.quantidade}}</td>
+                <td>R$ {{this.valor}}</td>
+                <td>
+                    <a href="/produtos/editar/{{this.id}}" class="btn btn-sm btn-info">Alterar</a>
+                    <a href="/produtos/excluir/{{this.id}}" class="btn btn-sm btn-danger">Excluir</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<a href="/" class="btn btn-secondary">Voltar ao Menu</a>
+
+</div>

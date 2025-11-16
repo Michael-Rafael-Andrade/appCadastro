@@ -3,8 +3,8 @@
 <div class="container mt-4">
     <h2>{{title}}</h2>
     <p>Preencha os dados da nova pessoa:</p>
-    
-    <form method="POST" action="pessoas/cadastro">
+
+    <form method="POST" action="/pessoas/cadastro">
         <div class="form-group mb-3">
             <label for="nome">Nome:</label>
             <input type="text" class="form-control" id="nome" name="nome" required>
@@ -31,4 +31,14 @@
         <button type="submit" class="btn btn-success">Salvar Pessoa</button>
         <a href="/pessoas/listagem" class="btn btn-secondary">Cancelar</a>
     </form>
+    
+    <script>
+        // Garante que o código só rode depois que a página HTML for totalmente carregada
+        $(document).ready(function () {
+
+            // Seleciona o campo Telefone pelo ID (#telefone) e aplica a máscara
+            $('#telefone').mask('(00) 0 0000-0000');
+
+        });
+    </script>
 </div>

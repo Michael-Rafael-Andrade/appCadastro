@@ -28,7 +28,7 @@ let pessoas = [
         endereco: "Rua das flores, 351",
     },
     {
-        id: 2,
+        id: 4,
         nome: "Bruno Costa",
         telefone: "98869-6789",
         dataNascimento: "1985-11-20",
@@ -44,7 +44,7 @@ function getMaxId(){
         return 1;
     }
     // Retorna o ID máximo atual + 1
-    const maxId = pessoas.reduce((max, pessoa) => (pessoa.id > max ? pessoa.id : max));
+    const maxId = pessoas.reduce((max, pessoa) => (pessoa.id > max ? pessoa.id : max), 0);
     return maxId + 1;
 }
 
