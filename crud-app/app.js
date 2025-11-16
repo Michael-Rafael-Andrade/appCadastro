@@ -33,6 +33,9 @@ app.engine('hbs', exphbs.engine({
       } else {
         return telefone;
       }
+    },
+    equal: function (v1, v2) {
+      return v1 === v2;
     }
   }
 }));
