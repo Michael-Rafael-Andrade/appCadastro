@@ -99,4 +99,31 @@ router.get('/editar/:id', function (req, res, next) {
     }
 });
 
+// Rota para RECEBER os dados alterados e substituir o objeto no Model 
+router.post('/editar/:id', function (req, res, next) {
+    // 1. Capturar o ID do formulário (que veio do campo hidden)
+    const idParaAlterar = parseInt(req.body.id);
+
+    // 2. Encontra a posição (índice) do objeto antigo no array
+    const indice = produtoModel.produtos.findIndex(p => p.id === idParaAlterar);
+
+    // 3. Verifica se encontrou o produto
+    if (indice !== -1) {
+        // Cria o novo objeto com os dados submetidos pelo formulário (req.body)
+        // MANTENDO o ID e CONVERTENDO os números
+        const dadosAtualizados = {
+            id: idParaAlterar, // Mantém o ID original (CRÍTICO)
+            nome: req.body.nome,
+            descricao: req.body.descricao,
+            quantidade: parseInt(req.body.quantidade), 
+            valor: parseFloat(req.body.valor),
+        };
+
+        // 4. Substitui o objeto antigo pelo novo objeto no array!
+        produtoModel.produtos[indice] = dadosAtualizados;
+    }
+    // 5. Redireciona para a listagem para confirmar a alteração
+    res.redirect('/produtos/listagem');
+});
+
 module.exports = router;
