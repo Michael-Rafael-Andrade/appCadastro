@@ -55,4 +55,26 @@ router.post('/cadastro', function(req, res, next) {
     res.redirect('/produtos/listagem');
 });
 
+// routes/produtos.js
+
+// GET /produtos/excluir/:id
+// Rota para EXCLUIR um produto pelo ID
+router.get('/excluir/:id', function (req, res, next) {
+    // 1. Captura o ID da URL e converte para número
+    const idParaExcluir = parseInt(req.params.id);
+
+    // 2. Encontra a posição (índice) do objeto no array de produtos
+    // Usamos findIndex para obter o índice necessário para o splice
+    const indice = produtoModel.produtos.findIndex(p => p.id === idParaExcluir);
+
+    // 3. Se encontrou a pessoa (índice diferente de -1), remove o item
+    if (indice !== -1) {
+        produtoModel.produtos.splice(indice, 1);
+    }
+
+    // 4. Redireciona o usuário de volta para a listagem atualizada
+    res.redirect('/produtos/listagem');
+});
+
+
 module.exports = router;
