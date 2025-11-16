@@ -10,7 +10,8 @@ var pessoaModel = require('../models/PessoaModel');
 // GET /pessoas/Listagem
 router.get('/listagem', function (req, res, next) {
     // O controller pega os dados brutos do Model
-    const listaDePessoas = pessoaModel.pessoas;
+    const termoBusca = req.query.q;
+    let listaDePessoas = pessoaModel.pessoas;
 
     // O Controller decide qual view renderizar, enviando os dados necessários 
     // O Express/HBS procurará por views/pessoas/listagem.hbs
