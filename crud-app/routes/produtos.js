@@ -76,5 +76,27 @@ router.get('/excluir/:id', function (req, res, next) {
     res.redirect('/produtos/listagem');
 });
 
+// GET /produtos/editar/:id
+// Rota para BUSCAR o produto e exibir o formulário de edição PREENCHIDO
+router.get('/editar/:id', function (req, res, next) {
+    // 1. Captura o ID da URL e converte para número
+    const idParaEditar = parseInt(req.params.id);
+
+    // 2. Encontra o objeto produto no array (uso do método find() do JS)
+    const produtoEncontrado = produtoModel.produtos.find(p => p.id === idParaEditar);
+
+    // 3. Verifica se o produto existe
+    if (produtoEncontrado) {
+        // Renderiza a View de edição, enviando o objeto do produto
+        // A View será views/produtos/edicao.hbs
+        res.render('produtos/edicao', { 
+            title: 'Editar Produto',
+            produto: produtoEncontrado 
+        });
+    } else {
+        // Se não encontrou, redireciona para a listagem
+        res.redirect('/produtos/listagem');
+    }
+});
 
 module.exports = router;
