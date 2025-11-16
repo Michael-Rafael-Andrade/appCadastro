@@ -18,4 +18,13 @@ router.get('/listagem', function(req, res, next) {
   });
 });
 
+// GET /produtos/cadastro
+// Rota para EXIBIR o formulário de cadastro de produtos
+router.get('/cadastro', function(req, res, next) {
+    // Renderiza a view views/produtos/cadastro.hbs
+    res.render('produtos/cadastro', {
+        title: 'Cadastro de Novo Produto'
+    });
+});
+
 module.exports = router;
