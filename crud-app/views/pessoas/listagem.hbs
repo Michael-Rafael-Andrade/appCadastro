@@ -5,6 +5,16 @@
     <h2>{{title}}</h2>
     <p>Aplicação CRUD - Listagem de Pessoas</p>
 
+    <form method="GET" action="/pessoas/listagem" class="d-flex mb-3">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Buscar por nome..."
+                aria-label="Buscar por nome">
+            <button class="btn btn-outline-secondary" type="submit">
+                Pesquisar 🔍
+            </button>
+        </div>
+    </form>
+
     <a href="/pessoas/cadastro" class="btn btn-primary mb-3">
         + Inserir Nova Pessoa
     </a> |
