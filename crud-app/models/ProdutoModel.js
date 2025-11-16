@@ -3,6 +3,7 @@ let produtos = [
     // Estrutura de produtos (ID, Nome, Descrição, Quantidade, Valor)
     {
         id: 101,
+        nome: "Notebook",
         descricao: "Laptop de alta performance para jogos.",
         quantidade: 5,
         valor: 5500.50, // Importante: armazenar como número (float)
